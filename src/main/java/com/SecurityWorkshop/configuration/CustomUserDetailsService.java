@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.SecurityWorkshop.model.Role;
 import com.SecurityWorkshop.model.User;
 import com.SecurityWorkshop.repository.UserRepository;
 
@@ -27,10 +28,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         if (user == null)
             throw new UsernameNotFoundException("User not found");
 
-        return new User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getRoles()));
+        return new org.springframework.security.core.userdetails.User(
+            user.getUsername(), 
+            user.getPassword(), 
+            getGrantedAuthorities(user.getRoles()));
     }
 
-    private List<GrantedAuthority> getGrantedAuthorities(String role) {
+    private List<GrantedAuthority> getGrantedAuthorities(List<Role> role) {
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
         return authorities;

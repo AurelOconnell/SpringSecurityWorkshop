@@ -8,22 +8,22 @@ public class SecurityController {
     
     @GetMapping("/register")
     public String register() {
-        return "Register";
+        return "register.html";
     }
 
     @GetMapping("/login")
         public String login() {
-            return "Login";
+            return "login.html";
         }
 
     @GetMapping("/user")
-        public String loggedUser() {
-            return "Logged as user";
+        public String getUser() {
+            return "user.html";
         }
 
     @GetMapping("/admin")
-        public String loggedAdmin() {
-            return "Logged as admin";
+        public String getAdmin() {
+            return "admin.html";
         }
 
 }
